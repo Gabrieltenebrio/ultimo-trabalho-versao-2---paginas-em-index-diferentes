@@ -1,0 +1,547 @@
+/* eu me arrependo de gter inventado tudo isso, demorou demais pra escrever
+(tenho que revisar isso ja rta dando erro nas bordas) 
+ficou muito feio ()talvez mude as cores)
+cores mudadas, fiz uma revisao completa, bordas corrigidas
+roxo ficou mais bonito*/
+
+
+* {
+    box-sizing: border-box;
+}
+
+/* define a fonte, as cores e tira o espaco padrao da pagina */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0b0b0f;
+    color: #f2f2f2;
+}
+
+/*cabeçalho*/
+/* organiza o topo da pagina com o nome e o menu */
+header {
+    background-color: #121019;
+    padding: 20px;
+    border-bottom: 1px solid #702cff;
+}
+
+/* deixa o nome do site roxo */
+h1 {
+    color: #a970ff;
+}
+
+/* deixa os links do menu claros e sem sublinhado */
+nav a {
+    color: #f2f2f2;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+/*foto de pf*/
+/* deixa a foto redonda e ajusta o corte dela */
+#inicio img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* organiza o cabecalho e o menu lado a lado */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+/* deixa os links do menu em linha e com um espaco entre eles */
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+nav a {
+    margin-right: 0;
+    transition: color 0.3s ease;
+}
+
+/* muda a cor dos links quando passa o mouse */
+nav a:hover {
+    color: #a970ff;
+}
+
+/* centraliza o conteudo principal da pagina inicial */
+#inicio {
+    min-height: 70vh;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    text-align: center;
+}
+
+/* limita e ajusta o tamanho do texto de apresentacao */
+#inicio h2 {
+    max-width: 800px;
+    font-size: 28px;
+    line-height: 1.5;
+}
+
+/* deixa a foto redonda com borda e brilho roxo */
+#inicio img {
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #702cff;
+    box-shadow: 0 0 20px #702cff55
+}
+
+/* ajusta o tamanho do audio nativo, se ele aparecer */
+#inicio audio {
+    width: 100%;
+    max-width: 350px;
+}
+
+/* organiza as habilidades em cartoes */
+#habilidades {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* estilo dos cartoes de cada grupo de habilidade */
+#habilidades>div {
+    display: inline-block;
+    vertical-align: top;
+    width: 30%;
+    min-width: 250px;
+    margin: 10px;
+    padding: 25px;
+    background-color: #121019;
+    border: 1px solid #302044;
+    border-radius: 12px;
+    text-align: left;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* destaca os titulos dos grupos de habilidade */
+#habilidades h3 {
+    margin-top: 0;
+    color: #a970ff;
+}
+
+/* diferencia os nomes das tecnologias */
+#habilidades h4 {
+    margin-top: 5px;
+    color: #d6baff
+}
+
+/* ajusta a cor e o espaco dos textos das habilidades */
+#habilidades p {
+    color: #c4c0cc;
+    line-height: 1.5;
+}
+
+/* levanta o cartao quando passa o mouse */
+#habilidades>div:hover {
+    transform: translateY(-5px);
+    border-color: #702cff;
+}
+
+/* limita e organiza as areas de sobre, projetos e contato */
+#sobre-mim,
+#projetos,
+#contato {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* destaca o titulo de cada uma dessas areas */
+#sobre-mim h2,
+#contato h2,
+#projetos h2 {
+    color: #a970ff;
+    font-size: 28px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #302044;
+    padding-bottom: 12px;
+}
+
+/* cria o fundo e a borda das caixas de conteudo */
+#sobre-mim>div,
+#contato>div,
+#projetos>div {
+    background-color: #121019;
+    border: 1px solid #302044;
+    border-radius: 12px;
+    padding: 25px;
+    line-height: 1.7;
+}
+
+/* ajusta a aparencia dos textos dessas areas */
+#sobre-mim p,
+#contato p,
+#projetos p {
+    color: #d0ccd8;
+    margin: 10px 0;
+}
+
+
+
+/* deixa os links de contato roxos */
+#contato a {
+    color: #a970ff;
+    text-decoration: none;
+}
+
+/* clareia o link de contato quando passa o mouse */
+#contato a:hover {
+    color: #ffffff;
+}
+
+/* estudar isso aqui mais tarde */
+/* reorganiza as partes da pagina quando a tela fica menor */
+@media (max-width: 768px) {
+
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav {
+        justify-content: center;
+        gap: 12px;
+    }
+
+    #inicio {
+        padding: 40px 15px;
+    }
+
+    #inicio h2 {
+        font-size: 22px;
+    }
+
+    #inicio img {
+        width: 150px;
+        height: 150px;
+    }
+
+    #habilidades>div {
+        display: block;
+        width: 100%;
+        min-width: 0;
+        margin: 15px 0;
+    }
+
+    #sobre-mim,
+    #contato,
+    #projetos {
+        padding: 40px 15px;
+    }
+}
+
+
+/* mais alguma coisa pra estudar (css é meio confuso) */
+/* esconde o conteudo no inicio pra ele aparecer com a classe visivel */
+.aparecer {
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+/* mostra o conteudo e move ele pra posicao normal */
+.aparecer.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* meio que isso reduz os movimentos, talvez eu mude isso  */
+/* evita animacoes pra quem prefere menos movimento na tela */
+@media (prefers-reduced-motion: reduce) {
+    .aparecer {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+
+/* deixa o titulo mais claro e com brilho roxo */
+#inicio h2 {
+    color: #f2eaff;
+    text-shadow: 0 0 5px #a970ff,
+        0 0 12px #702cff55;
+    transition: text-shadow 0.3s ease;
+}
+
+
+
+/* aumenta o brilho do titulo quando passa o mouse */
+#inicio h2:hover {
+    text-shadow: 0 0 8px #a970ff, 0 0 20px #702cff, 0 0 35px #702cff88;
+}
+
+/* define os pontos da animacao de brilho do titulo */
+@keyframes brilhoNeon {
+
+    0%,
+    100% {
+        text-shadow: 0 0 5px #a970ff, 0 0 12px #702cff55;
+    }
+
+    50% {
+        text-shadow: 0 0 10px #a970ff, 0 0 24px #702cff99;
+    }
+}
+
+/* faz o titulo repetir a animacao de brilho */
+#inicio h2 {
+    animation: brilhoNeon 3s ease-in-out infinite;
+}
+
+/* deixa a rolagem suave e ajusta o espaco no topo */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px;
+}
+
+/* cria espaco nos links e prepara a animacao do menu */
+nav a {
+    display: inline-block;
+    padding: 8px 0;
+    transition: color 0.3s ease,
+        transform 0.3s ease;
+}
+
+/* levanta o link e muda a cor quando passa o mouse */
+nav a:hover {
+    color: #a970ff;
+    transform: translateY(-2px);
+}
+
+/* estilo do rodape da pagina */
+footer {
+    background-color: #121019;
+    border-top: 1px solid #702cff;
+    padding: 25px 15px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* ajusta a cor e o tamanho do texto do rodape */
+footer p {
+    color: #a9a3b5;
+    font-size: 14px;
+    margin: 0;
+}
+
+/* estilo do botao que abre o menu no celular */
+#menu-botao {
+    background: transparent;
+    border: none;
+    color: #f2f2f2;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+
+/* coisa pra cll, tambem botar nos estudos */
+/* mostra o botao e transforma o menu em lista no celular */
+@media (max-width: 768px) {
+    header {
+        position: relative;
+    }
+
+    #menu-botao {
+        display: block;
+    }
+
+    header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    header nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        padding: 15px 0;
+    }
+
+    header nav.menu-aberto {
+        display: flex;
+    }
+}
+/* js, mas to sem*/
+/* camada fixa que pode receber o efeito de particulas */
+#particulas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+}
+
+
+/* monta os cartoes de projetos em colunas */
+.lista-projetos {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* aparencia de cada cartao de projeto */
+.cartao-projeto {
+    background-color: #121019;
+    border: 1px solid #302044;
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+/* destaca o nome do projeto */
+.cartao-projeto h3 {
+    color: #a970ff;
+    margin-top: 0;
+}
+
+/* ajusta o texto da descricao do projeto */
+.cartao-projeto p {
+    color: #c4c0cc;
+    line-height: 1.6;
+}
+
+/* mostra as tecnologias usadas no projeto */
+.cartao-projeto span {
+    display: inline-block;
+    color: #d6baff;
+    font-size: 13px;
+    margin-top: 10px;
+}
+
+/* levanta o cartao e adiciona brilho quando passa o mouse */
+.cartao-projeto:hover {
+    transform: translateY(-6px);
+    border-color: #702cff;
+    box-shadow: 0 8px 25px #702cff22;
+}
+
+/* deixa os cartoes um embaixo do outro no celular */
+@media (max-width: 768px) {
+    .lista-projetos {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* estilo dos links que parecem botoes nos cartoes */
+.botao-projeto {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 10px 16px;
+    color: #ffffff;
+    background-color: #702cff;
+    border: 1px solid #a970ff;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+/* muda a cor e levanta o botao quando passa o mouse */
+.botao-projeto:hover {
+    background-color: #a970ff;
+    transform: translateY(-2px);
+}
+
+.botao-projeto:focus-visible {
+    outline: 2px solid #a970ff;
+    outline-offset: 2px;
+}
+
+#particulas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+header,
+main,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+nav a[aria-current="page"] {
+    color: #a970ff;
+    text-shadow: 0 0 8px #702cff55;
+}
+/*muito feio, eu tenho que mudar isso (importante)*/
+.player-musica {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+    background: #121019;
+    border: 1px solid #702cff;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 18px #702cff22;
+}
+
+.player-musica h3 {
+    color: #a970ff;
+    margin-top: 0;
+}
+/*isso nao ta funcionando, to sem js e esta muito feio*/
+.player-musica audio {
+    display: block;
+    width: 100%;
+}
+
+#status-musica {
+    color: #312a2a;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+
+.cartao-login{
+    width: 100%;
+    max-width: 400px;
+}
+.cartao-login label{
+    display: block;
+    margin-bottom: 8px;
+    color: #d6baff;
+}
+
+.cartao-login input{
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #302044;
+    border-radius: 8px;
+    background-color: #121019;
+    color: #f2f2f2;
+}
+
+.cartao-login input:focus{
+    outline: 2px solid #a970ff;
+    outline-offset: 2px;
+}

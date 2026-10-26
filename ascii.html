@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b0f">
+    <title>Gabe | ASCII</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+       <!--demorou um pouco mas esta arrumado--> 
+        /* centraliza a arte e deixa rolar pro lado se ela nao couber */
+        .ascii-container {
+            min-height: 75vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 10px;
+            overflow-x: auto;
+        }
+
+        /* deixa a arte roxa e mantem os espacos do desenho */
+        .ascii-container pre {
+            margin: 0;
+            color: #a970ff;
+            font-family: monospace;
+            font-size: clamp(7px, 1.5vw, 14px);
+            line-height: 1.15;
+            white-space: pre;
+            text-shadow: 0 0 8px #702cff;
+        }
+
+        /* no celular a arte comeca pela esquerda */
+        @media (max-width: 480px) {
+            .ascii-container {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- nome do site e links pra navegar entre as paginas -->
+    <header>
+        <h1>Gabe</h1>
+        <!--arrumar quando eu colocar o js (nao funfa)-->
+        <button id="menu-botao"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+            aria-controls="menu">
+            ☰
+        </button>
+
+        <nav id="menu">
+            <a href="index.html">Início</a>
+            <a href="seguir.html">Seguir</a>
+            <a href="sobre.html">Sobre Mim</a>
+            <a href="contato.html">Contato</a>
+            <a href="habilidades.html">Habilidades</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="ascii.html" aria-current="page">ASCII</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- area que centraliza e mostra o desenho em ASCII -->
+        <div class="ascii-container">
+<pre>
+<!-- minha arte de ascii (caveira)-->
+                             ...----....
+                         ..-:"''         ''"-..
+                      .-'                      '-.
+                    .'              .     .       '.
+                  .'   .          .    .      .    .''.
+                .'  .    .       .   .   .     .   . ..:.
+              .' .   . .  .       .   .   ..  .   . ....::.
+             ..   .   .      .  .    .     .  ..  . ....:IA.
+            .:  .   .    .    .  .  .    .. .  .. .. ....:IA.
+           .: .   .   ..   .    .     . . .. . ... ....:.:VHA.
+           '..  .  .. .   .       .  . .. . .. . .....:.::IHHB.
+          .:. .  . .  . .   .  .  . . . ...:.:... .......:HIHMM.
+         .:.... .   . ."::"'.. .   .  . .:.:.:II;,. .. ..:IHIMMA
+         ':.:..  ..::IHHHHHI::. . .  ...:.::::.,,,. . ....VIMMHM
+        .:::I. .AHHHHHHHHHHAI::. .:...,:IIHHHHHHMMMHHL:. . VMMMM
+       .:.:V.:IVHHHHHHHMHMHHH::..:" .:HIHHHHHHHHHHHHHMHHA. .VMMM.
+       :..V.:IVHHHHHMMHHHHHHHB... . .:VPHHMHHHMMHHHHHHHHHAI.:VMMI
+       ::V..:VIHHHHHHMMMHHHHHH. .   .I":IIMHHMMHHHHHHHHHHHAPI:WMM
+       ::". .:.HHHHHHHHMMHHHHHI.  . .:..I:MHMMHHHHHHHHHMHV:':H:WM
+       :: . :.::IIHHHHHHMMHHHHV  .ABA.:.:IMHMHMMMHMHHHHV:'. .IHWW
+       '.  ..:..:.:IHHHHHMMHV" .AVMHMA.:.'VHMMMMHHHHHV:' .  :IHWV
+        :.  .:...:".:.:TPP"   .AVMMHMMA.:. "VMMHHHP.:... .. :IVAI
+       .:.   '... .:"'   .   ..HMMMHMMMA::. ."VHHI:::....  .:IHW'
+       ...  .  . ..:IIPPIH: ..HMMMI.MMMV:I:.  .:ILLH:.. ...:I:IM
+     : .   .'"' .:.V". .. .  :HMMM:IMMMI::I. ..:HHIIPPHI::'.P:HM.
+     :.  .  .  .. ..:.. .    :AMMM IMMMM..:...:IV":T::I::.".:IHIMA
+     'V:.. .. . .. .  .  .   'VMMV..VMMV :....:V:.:..:....::IHHHMH
+       "IHH:.II:.. .:. .  . . . " :HB"" . . ..PI:.::.:::..:IHHMMV"
+        :IP""HHII:.  .  .    . . .'V:. . . ..:IH:.:.::IHIHHMMMMM"
+        :V:. VIMA:I..  .     .  . .. . .  .:.I:I:..:IHHHHMMHHMMM
+        :"VI:.VWMA::. .:      .   .. .:. ..:.I::.:IVHHHMMMHMMMMI
+        :."VIIHHMMA:.  .   .   .:  .:.. . .:.II:I:AMMMMMMHMMMMMI
+        :..VIHIHMMMI...::.,:.,:!"I:!"I!"I!"V:AI:VAMMMMMMHMMMMMM'
+        ':.:HIHIMHHA:"!!"I.:AXXXVVXXXXXXXA:."HPHIMMMMHHMHMMMMMV
+          V:H:I:MA:W'I :AXXXIXII:IIIISSSSSSXXA.I.VMMMHMHMMMMMM
+            'I::IVA ASSSSXSSSSBBSBMBSSSSSSBBMMMBS.VVMMHIMM'"'
+             I:: VPAIMSSSSSSSSSBSSSMMBSSSBBMMMMXXI:MMHIMMI
+            .I::. "H:XIIXBBMMMMMMMMMMMMMMMMMBXIXXMMPHIIMM'
+            :::I.  ':XSSXXIIIIXSSBMBSSXXXIIIXXSMMAMI:.IMM
+            :::I:.  .VSSSSSISISISSSBII:ISSSSBMMB:MI:..:MM
+            ::.I:.  ':"SSSSSSSISISSXIIXSSSSBMMB:AHI:..MMM.
+            ::.I:. . ..:"BBSSSSSSSSSSSSBBBMMMB:AHHI::.HMMI
+            :..::.  . ..::":BBBBBSSBBBMMMB:MMMMHHII::IHHMI
+            ':.I:... ....:IHHHHHMMMMMMMMMMMMMMMHHIIIIHMMV"
+              "V:. ..:...:.IHHHMMMMMMMMMMMMMMMMHHHMHHMHP'
+               ':. .:::.:.::III::IHHHHMMMMMHMHMMHHHHM"
+                 "::....::.:::..:..::IIIIIHHHHMMMHHMV"
+                   "::.::.. .. .  ...:::IIHHMMMMHMV"
+                     "V::... . .I::IHHMMV"'
+                       '"VHVHHHAHHHHMMV:"'
+
+</pre>
+        </div>
+    </main>
+    <!--implementar o js mais tarde-->
+    <script src="javascriptch.js"></script>
+</body>
+</html>

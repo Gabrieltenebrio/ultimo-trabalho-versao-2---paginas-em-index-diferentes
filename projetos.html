@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b0f">
+    <title>Gabe | Projetos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- camada que pode ser usada como fundo pras particulas -->
+    <canvas id="particulas" aria-hidden="true"></canvas>
+
+    <!-- nome do site e links pra navegar entre as paginas -->
+    <header>
+        <h1>Gabe</h1>
+        <button id="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">☰</button>
+        <nav id="menu">
+            <a href="index.html">Início</a>
+            <a href="seguir.html">Seguir</a>
+            <a href="sobre.html">Sobre Mim</a>
+            <a href="contato.html">Contato</a>
+            <a href="habilidades.html">Habilidades</a>
+            <a href="projetos.html" aria-current="page">Projetos</a>
+            <a href="ascii.html">ASCII</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- lista com os cartoes dos projetos -->
+        <section id="projetos">
+            <h2>Meus projetos</h2>
+
+            <div class="lista-projetos">
+                <!-- cada cartao mostra um projeto e as tecnologias usadas -->
+                <article class="cartao-projeto">
+                    <h3>Meu portfólio</h3>
+                    <p>
+                        Site pessoal desenvolvido para apresentar
+                        minhas habilidades e meus projetos.
+                    </p>
+                    <!--muito formal (talvesz eu deixe assim mesmo)-->
+                    <span>HTML · CSS · JavaScript</span>
+                    <a class="botao-projeto" href="https://github.com/Gabrieltenebrio" target="_blank"
+                        rel="noopener noreferrer">
+                        Ver meu GitHub
+                    </a>
+                </article>
+
+                <article class="cartao-projeto">
+                    <h3>Projeto de IoT</h3>
+                    <p>
+                        <!--nao lembro oque fiz aqui (revisar esse lugar inteiro amanha)-->
+                        Espaço para apresentar um projeto de
+                        Internet das Coisas quando estiver pronto.
+                    </p>
+                    <span>C++ · IoT</span>
+                </article>
+
+                <article class="cartao-projeto">
+                    <h3>Projeto de Python</h3>
+                    <p>
+                        Espaço para apresentar um projeto de
+                        programação ou automação em Python.
+                    </p>
+                    <span>Python</span>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- rodape da pagina -->
+    <footer>
+        <p>&copy; 2026 Gabe. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/animejs@4/dist/bundles/anime.umd.min.js"></script>
+    <script src="javascriptch.js"></script>
+</body>
+
+</html>

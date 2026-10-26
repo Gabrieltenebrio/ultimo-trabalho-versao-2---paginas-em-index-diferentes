@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b0f">
+    <meta name="description"
+        content="Portfólio de Gabe, desenvolvedor web em formação, estudante de IoT e segurança ética.">
+    <title>Gabe | Início</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- caso eu precise de js, aqui ja esta pre montado-->
+    <!-- camada que pode ser usada como fundo pras particulas -->
+    <canvas id="particulas" aria-hidden="true"></canvas>
+
+    <!-- aqui ficam o nome do site e os links pras outras paginas -->
+    <header>
+        <h1>Gabe</h1>
+        <button id="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">☰</button>
+        <nav id="menu">
+            <!--adicionei um menu bonito mas pretendo mudar quando usar js-->
+            <a href="index.html" aria-current="page">Início</a>
+            <a href="seguir.html">Seguir</a>
+            <a href="sobre.html">Sobre Mim</a>
+            <a href="contato.html">Contato</a>
+            <a href="habilidades.html">Habilidades</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="ascii.html">ASCII</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- apresentacao principal da pagina inicial -->
+        <!--talvez mudar isso pra algo formal-->
+        <section id="inicio">
+            <h2>Sou Gabe e estou virando um dev ;)
+                | Talvez red team | Mexo com IoT
+            </h2>
+            <!-- minha foto de perfil (simplesmentes rosas)-->
+            <img src="20261006_160027.jpg" alt="Foto de Gabe">
+
+            <!--lembrete de arrumar isso com js (vou deixar assim por enquanto)-->
+            <!-- player com informacoes, controles e volume da musica -->
+            <div class="music-player">
+                <div class="music-info">
+                    <div class="music-cover">
+                        <span>♫</span>
+                    </div>
+
+                    <div class="music-details">
+                        <h3>Altars of Apostasy</h3>
+                        <p>musica tema</p>
+                    </div>
+
+                    <span class="music-status" id="music-status"></span>
+                </div>
+                <!--musica muito boa, aprendi a usar a config de audio (lembre de arrumar)-->
+                <audio id="player" preload="metadata">
+                    <source src="Heaven_Pierce_Her_-_Altars_of_Apostasy_(mp3.pm).mp3" type="audio/mpeg">
+                    Seu navegador não suporta áudio.
+                </audio>
+                <!--controle da musica, tenho que aprender mais sobre isso-->
+                <div class="music-timeline">
+                    <input type="range" id="music-progress" min="0" max="100" value="0" step="0.1"
+                        aria-label="Progresso da música">
+
+                    <div class="music-times">
+                        <span id="music-current">00:00</span>
+                    </div>
+                    <div class="music-times">
+                        <span id="music-duration">00:00</span>
+                    </div>
+                </div>
+
+                <div class="music-controls">
+                    <button id="music-play" class="play-button" type="button" aria-label="Reproduzir música">
+                        ▶
+                    </button>
+                </div>
+
+                <div class="music-volume">
+                    <span>som</span>
+                    <input type="range" id="music-volume" min="0" max="1" value="0.5" step="0.01"
+                        aria-label="Volume da música">
+                    <span id="music-volume-value">50%</span>
+                </div>
+            </div>
+
+        </section>
+    </main>
+    <!--desnecessario mas talvez eu deixe-->
+    <!-- rodape que aparece no fim da pagina -->
+    <footer>
+        <p>&copy; 2026 Gabe. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/animejs@4/dist/bundles/anime.umd.min.js"></script>
+    <script src="javascriptch.js"></script>
+</body>
+
+</html>

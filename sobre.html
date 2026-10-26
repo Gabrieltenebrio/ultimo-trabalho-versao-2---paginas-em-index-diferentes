@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b0f">
+    <title>Gabe | Sobre Mim</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- camada que pode ser usada como fundo pras particulas -->
+    <canvas id="particulas" aria-hidden="true"></canvas>
+
+    <!-- nome do site e links pra navegar entre as paginas -->
+    <header>
+        <h1>Gabe</h1>
+        <!-- mesmo problema, esperar ate poder colocar js-->
+        <button id="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">☰</button>
+        <nav id="menu">
+            <a href="index.html">Início</a>
+            <a href="seguir.html">Seguir</a>
+            <a href="sobre.html" aria-current="page">Sobre Mim</a>
+            <a href="contato.html">Contato</a>
+            <a href="habilidades.html">Habilidades</a>
+            <a href="projetos.html">Projetos</a>
+            <a href="ascii.html">ASCII</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- area com os textos de apresentacao sobre mim -->
+        <section id="sobre-mim">
+            <h2>Sobre mim</h2>
+            <div>
+                <p>
+                    E aí! Sou Gabe e estou aprendendo desenvolvimento web,
+                    IoT e segurança cibernética ética.
+                </p>
+                <p>
+                    <!--tenho que mudar esse texto (mudei hoje)-->
+                    Estudo IoT e desenvolvimento web em uma escola,
+                    enquanto aprendo sobre hacking ético por conta própria.
+                </p>
+                <p>
+                    Quero continuar evoluindo na programação, criar projetos
+                    próprios e aprender mais sobre como sistemas e redes
+                    funcionam.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <!-- rodape da pagina -->
+    <footer>
+        <p>&copy; 2026 Gabe. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/animejs@4/dist/bundles/anime.umd.min.js"></script>
+    <script src="javascriptch.js"></script>
+</body>
+
+</html>
