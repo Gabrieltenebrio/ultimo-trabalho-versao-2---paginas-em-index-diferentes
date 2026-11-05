@@ -10,18 +10,29 @@ roxo ficou mais bonito*/
 }
 
 /* define a fonte, as cores e tira o espaco padrao da pagina */
+:root{
+    --cor-fundo: #0b0b0f;
+    --cor-texto: #f2f2f2;
+    --cor-super: #121019;
+}
+
+body.tema-claro {
+    --cor-fundo: #f6f3fa;
+    --cor-texto: #25212b;
+    --cor-super: #ffffff;
+}
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #0b0b0f;
-    color: #f2f2f2;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
 }
 
 /*cabeçalho*/
 /* organiza o topo da pagina com o nome e o menu */
 header {
-    background-color: #121019;
+    background-color: var(--cor-super);
     padding: 20px;
     border-bottom: 1px solid #702cff;
 }
@@ -127,7 +138,7 @@ nav a:hover {
     min-width: 250px;
     margin: 10px;
     padding: 25px;
-    background-color: #121019;
+    background-color: var(--cor-super);
     border: 1px solid #302044;
     border-radius: 12px;
     text-align: left;
@@ -182,7 +193,7 @@ nav a:hover {
 #sobre-mim>div,
 #contato>div,
 #projetos>div {
-    background-color: #121019;
+    background-color: var(--cor-super);
     border: 1px solid #302044;
     border-radius: 12px;
     padding: 25px;
@@ -333,7 +344,7 @@ nav a:hover {
 
 /* estilo do rodape da pagina */
 footer {
-    background-color: #121019;
+    background-color: var(--cor-super);
     border-top: 1px solid #702cff;
     padding: 25px 15px;
     text-align: center;
@@ -407,7 +418,7 @@ footer p {
 
 /* aparencia de cada cartao de projeto */
 .cartao-projeto {
-    background-color: #121019;
+    background-color: var(--cor-super);
     border: 1px solid #302044;
     border-radius: 12px;
     padding: 24px;
@@ -498,7 +509,7 @@ nav a[aria-current="page"] {
     width: 100%;
     max-width: 400px;
     padding: 20px;
-    background: #121019;
+    background: var(--cor-super);
     border: 1px solid #702cff;
     border-radius: 12px;
     text-align: center;
@@ -537,7 +548,7 @@ nav a[aria-current="page"] {
     margin-bottom: 15px;
     border: 1px solid #302044;
     border-radius: 8px;
-    background-color: #121019;
+    background-color: var(--cor-super);
     color: #f2f2f2;
 }
 
@@ -547,5 +558,148 @@ nav a[aria-current="page"] {
 }
 
 #banner {
-    max
+    max-width: 100%;
+    min-height: 220px;
+    padding: 35px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+}
+
+#banner h2 {
+    margin: 0 0 10px;
+}
+
+#banner p {
+    margin: 0;
+}
+
+.controle-de-banner {
+    display: flex;
+    gap: 10px;
+}
+
+.controle-de-banner button {
+    padding: 8px 12px;
+    color: #f2f2f2;
+    background-color: #302044;
+    border: 1px solid #a970ff;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.controle-de-banner button:hover {
+    background-color: #702cff;
+}
+
+body.tema-claro .controle-de-banner button {
+    color: #302044;
+    background-color: #eee6f8;
+    border-color: #8b5cc7;
+}
+
+body.tema-claro .controle-de-banner button:hover {
+    background-color: #d8c8ed;
+}
+
+/* Botao para alternar o tema, mantendo o destaque roxo do site. */
+#tema-botao {
+    padding: 9px 13px;
+    color: #f2f2f2;
+    background-color: #302044;
+    border: 1px solid #a970ff;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#tema-botao:hover {
+    background-color: #702cff;
+}
+
+#tema-botao:focus-visible,
+#menu-botao:focus-visible {
+    outline: 2px solid #a970ff;
+    outline-offset: 3px;
+}
+
+/* Melhora o contraste dos textos e controles no tema claro. */
+body.tema-claro header,
+body.tema-claro footer {
+    border-color: #d8c8ed;
+}
+
+body.tema-claro nav a {
+    color: #383044;
+}
+
+body.tema-claro nav a:hover,
+body.tema-claro nav a[aria-current="page"] {
+    color: #5b21b6;
+}
+
+body.tema-claro h1,
+body.tema-claro #habilidades h3,
+body.tema-claro #sobre-mim h2,
+body.tema-claro #contato h2,
+body.tema-claro #projetos h2,
+body.tema-claro .cartao-projeto h3,
+body.tema-claro .player-musica h3,
+body.tema-claro #contato a {
+    color: #5b21b6;
+}
+
+body.tema-claro #inicio h2 {
+    color: #302044;
+    text-shadow: none;
+    animation: none;
+}
+
+body.tema-claro #inicio h2:hover {
+    text-shadow: none;
+}
+
+body.tema-claro main p,
+body.tema-claro .cartao-projeto span,
+body.tema-claro footer p {
+    color: #494252;
+}
+
+body.tema-claro #habilidades h4,
+body.tema-claro .cartao-login label {
+    color: #5b21b6;
+}
+
+body.tema-claro #habilidades > div,
+body.tema-claro #sobre-mim > div,
+body.tema-claro #contato > div,
+body.tema-claro .cartao-projeto,
+body.tema-claro .player-musica {
+    border-color: #d8c8ed;
+}
+
+body.tema-claro #menu-botao {
+    color: #383044;
+}
+
+body.tema-claro #tema-botao {
+    color: #302044;
+    background-color: #eee6f8;
+    border-color: #8b5cc7;
+}
+
+body.tema-claro #tema-botao:hover {
+    background-color: #d8c8ed;
+}
+
+body.tema-claro .cartao-login input {
+    color: #25212b;
+    border-color: #b89bd8;
+}
+
+body.tema-claro .botao-projeto:hover {
+    background-color: #5b21b6;
 }

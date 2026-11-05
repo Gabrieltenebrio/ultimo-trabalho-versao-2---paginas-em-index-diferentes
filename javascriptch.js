@@ -287,23 +287,36 @@ if (canvas && ctx) {
 const slidesbanner = document.querySelectorAll("#banner .banner-slide");
 const botaoAnterior = document.querySelector("#banner-anterior");
 const botaoProximo = document.querySelector("#banner-proximo");
-//so configura o carrosel se os elementos estiverem sido encontrados
+
 if (slidesbanner.length > 0 && botaoAnterior && botaoProximo) {
     let slideAtual = 0;
 
-    // esconde o destaque atual e mostra o certo
     function mostrarSlide(indice) {
         slidesbanner[slideAtual].hidden = true;
-        //o resto da conta faz o giro ir por fim ou começo
         slideAtual = (indice + slidesbanner.length) % slidesbanner.length;
-
         slidesbanner[slideAtual].hidden = false;
     }
-    //clique = slide anterior
+
     botaoAnterior.addEventListener("click", () => {
         mostrarSlide(slideAtual - 1);
     });
+
     botaoProximo.addEventListener("click", () => {
         mostrarSlide(slideAtual + 1);
+    });
+}
+
+const botaoTema = document.querySelector("#tema-botao");
+
+if (botaoTema) {
+    const temaSalvo = localStorage.getItem("tema");
+
+    if (temaSalvo === "claro") {
+        document.body.classList.add("tema-claro");
+    }
+
+    botaoTema.addEventListener("click", () => {
+        const temaClaroAtivo = document.body.classList.toggle("tema-claro");
+        localStorage.setItem("tema", temaClaroAtivo ? "claro" : "escuro");
     });
 }
