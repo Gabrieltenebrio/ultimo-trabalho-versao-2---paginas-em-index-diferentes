@@ -33,7 +33,14 @@
         <!-- lista com os cartoes dos projetos -->
         <section id="projetos">
             <h2>Meus projetos</h2>
-
+            <!-- esse campo procura pelo nome, descricao ou tecnologia -->
+            <label for="pesquisa-proj">pesquisar projeto:</label>
+            <input 
+            id="pesquisa-proj"
+            type="search"
+            placeholder="nome, tech ou descrição"
+            >
+        <p id="resultado-pesquisa" aria-live="polite"></p>
             <div class="lista-projetos">
                 <!-- cada cartao mostra um projeto e as tecnologias usadas -->
                 <article class="cartao-projeto">
@@ -77,6 +84,7 @@
         <p>&copy; 2026 Gabe. Todos os direitos reservados.</p>
     </footer>
 
+    <!-- carrega a biblioteca de animacao e o javascript do site -->
     <script src="https://cdn.jsdelivr.net/npm/animejs@4/dist/bundles/anime.umd.min.js"></script>
     <script src="javascriptch.js"></script>
 </body>

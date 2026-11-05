@@ -703,3 +703,155 @@ body.tema-claro .cartao-login input {
 body.tema-claro .botao-projeto:hover {
     background-color: #5b21b6;
 }
+
+/* deixa a roleta mais organizada e combina ela com o resto do site */
+#roleta-frases {
+    width: calc(100% - 32px);
+    max-width: 760px;
+    margin: 30px auto;
+    padding: 28px 24px;
+    text-align: center;
+    background-color: var(--cor-super);
+    border: 1px solid #302044;
+    border-radius: 12px;
+}
+
+#roleta-frases h2 {
+    color: #a970ff;
+}
+
+#frase-atual {
+    min-height: 48px;
+    margin: 20px 0;
+    line-height: 1.6;
+}
+
+body.tema-claro #roleta-frases {
+    border-color: #d8c8ed;
+}
+
+body.tema-claro #roleta-frases h2 {
+    color: #5b21b6;
+}
+
+/* deixa a pesquisa mais facil de achar e de usar */
+#projetos label[for="pesquisa-proj"] {
+    display: block;
+    margin-bottom: 8px;
+    color: #d6baff;
+}
+
+#pesquisa-proj {
+    width: 100%;
+    max-width: 520px;
+    padding: 12px 14px;
+    color: var(--cor-texto);
+    background-color: var(--cor-super);
+    border: 1px solid #702cff;
+    border-radius: 8px;
+}
+
+#pesquisa-proj:focus,
+#text-tarefa:focus {
+    outline: 2px solid #a970ff;
+    outline-offset: 2px;
+}
+
+#resultado-pesquisa {
+    min-height: 24px;
+    margin: 10px 0 18px;
+}
+
+/* organiza a lista de tarefas num cartao igual ao resto do site */
+#lista {
+    width: calc(100% - 32px);
+    max-width: 760px;
+    margin: 30px auto;
+    padding: 28px 24px;
+    background-color: var(--cor-super);
+    border: 1px solid #302044;
+    border-radius: 12px;
+}
+
+#lista h2 {
+    margin-top: 0;
+    color: #a970ff;
+}
+
+#form-tarefa label {
+    display: block;
+    margin-bottom: 8px;
+    color: #d6baff;
+}
+
+#form-tarefa input[type="text"] {
+    width: 100%;
+    max-width: 520px;
+    padding: 12px 14px;
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+    border: 1px solid #702cff;
+    border-radius: 8px;
+}
+
+#form-tarefa .botao-projeto {
+    margin-top: 12px;
+}
+
+#lista-tarefas {
+    display: grid;
+    gap: 10px;
+    padding: 0;
+    list-style: none;
+}
+
+#lista-tarefas li {
+    padding: 12px 14px;
+    background-color: var(--cor-fundo);
+    border: 1px solid #302044;
+    border-radius: 8px;
+    overflow-wrap: anywhere;
+}
+
+#lista-tarefas label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+#lista-tarefas input[type="checkbox"] {
+    flex: 0 0 auto;
+    accent-color: #702cff;
+}
+
+#resultado-tarefas {
+    min-height: 24px;
+    margin-bottom: 0;
+    color: #d6baff;
+}
+
+/* ajusta as cores dessas partes quando o tema claro esta ligado */
+body.tema-claro #projetos label[for="pesquisa-proj"],
+body.tema-claro #form-tarefa label {
+    color: #5b21b6;
+}
+
+body.tema-claro #lista {
+    border-color: #d8c8ed;
+}
+
+body.tema-claro #lista h2 {
+    color: #5b21b6;
+}
+
+body.tema-claro #pesquisa-proj,
+body.tema-claro #form-tarefa input[type="text"],
+body.tema-claro #lista-tarefas li {
+    border-color: #d8c8ed;
+}
+
+body.tema-claro #resultado-pesquisa,
+body.tema-claro #resultado-tarefas {
+    color: #494252;
+}

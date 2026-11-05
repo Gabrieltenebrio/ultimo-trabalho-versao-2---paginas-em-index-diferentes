@@ -1,14 +1,18 @@
+// confere se a pessoa prefere menos movimento na pagina
 const prefereMovimentoReduzido = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
 );
 
+// pega as secoes para mostrar elas quando aparecem na tela
 const secoes = document.querySelectorAll("main section");
 
+// mostra tudo sem animacao se a pessoa preferir menos movimento
 if (prefereMovimentoReduzido.matches || !("IntersectionObserver" in window)) {
     secoes.forEach((secao) => {
         secao.classList.add("visivel");
     });
 } else {
+    // observa as secoes e mostra cada uma quando ela aparece
     const observador = new IntersectionObserver(
         (entradas) => {
             entradas.forEach((entrada) => {
@@ -29,6 +33,7 @@ if (prefereMovimentoReduzido.matches || !("IntersectionObserver" in window)) {
     });
 }
 
+// anima o titulo e a foto da pagina inicial
 if (!prefereMovimentoReduzido.matches && typeof anime !== "undefined") {
     const tituloInicio = document.querySelector("#inicio h2");
     const imagemInicio = document.querySelector("#inicio img");
@@ -53,6 +58,7 @@ if (!prefereMovimentoReduzido.matches && typeof anime !== "undefined") {
     }
 }
 
+// abre e fecha o menu em telas menores
 const menuBotao = document.querySelector("#menu-botao");
 const menu = document.querySelector("#menu");
 
@@ -78,6 +84,7 @@ if (menuBotao && menu) {
     });
 }
 
+// pega os controles do player de musica
 const player = document.querySelector("#player");
 const botaoMusica = document.querySelector("#music-play");
 const progressoMusica = document.querySelector("#music-progress");
@@ -97,6 +104,7 @@ if (
     valorVolume &&
     statusMusica
 ) {
+    // transforma a duracao em minutos e segundos
     const formatarTempo = (tempo) => {
         if (!Number.isFinite(tempo)) {
             return "00:00";
@@ -108,11 +116,13 @@ if (
         return `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
     };
 
+    // atualiza a duracao assim que o navegador carrega a musica
     const atualizarDuracao = () => {
         duracaoMusica.textContent = formatarTempo(player.duration);
         progressoMusica.disabled = !Number.isFinite(player.duration);
     };
 
+    // mostra o tempo atual e move a barra de progresso
     const atualizarProgresso = () => {
         tempoAtualMusica.textContent = formatarTempo(player.currentTime);
 
@@ -127,6 +137,7 @@ if (
     valorVolume.textContent = `${Math.round(player.volume * 100)}%`;
     atualizarDuracao();
 
+    // toca ou pausa a musica quando apertar o botao
     botaoMusica.addEventListener("click", () => {
         if (player.paused) {
             player.play().catch(() => {
@@ -138,6 +149,7 @@ if (
         }
     });
 
+    // atualiza o botao e o aviso quando a musica toca ou para
     player.addEventListener("play", () => {
         botaoMusica.textContent = "❚❚";
         botaoMusica.setAttribute("aria-label", "Pausar música");
@@ -153,6 +165,7 @@ if (
         }
     });
 
+    // mostra avisos se a musica terminar ou der erro
     player.addEventListener("ended", () => {
         statusMusica.textContent = "Música finalizada";
     });
@@ -165,6 +178,7 @@ if (
     player.addEventListener("durationchange", atualizarDuracao);
     player.addEventListener("timeupdate", atualizarProgresso);
 
+    // deixa mudar o ponto da musica pela barra
     progressoMusica.addEventListener("input", () => {
         if (Number.isFinite(player.duration)) {
             player.currentTime =
@@ -172,12 +186,14 @@ if (
         }
     });
 
+    // muda o volume e atualiza o numero na tela
     controleVolume.addEventListener("input", () => {
         player.volume = Number(controleVolume.value);
         valorVolume.textContent = `${Math.round(player.volume * 100)}%`;
     });
 }
 
+// prepara a tela onde as particulas vao aparecer
 const canvas = document.querySelector("#particulas");
 const ctx = canvas?.getContext("2d");
 
@@ -187,6 +203,7 @@ if (canvas && ctx) {
     let altura = 0;
     let animacaoParticulas;
 
+    // ajusta o tamanho da tela e cria as particulas
     function ajustarCanvas() {
         const escala = Math.min(window.devicePixelRatio || 1, 2);
 
@@ -214,6 +231,7 @@ if (canvas && ctx) {
         }));
     }
 
+    // desenha as particulas e liga as que estao perto
     function desenharParticulas() {
         ctx.clearRect(0, 0, largura, altura);
 
@@ -259,6 +277,7 @@ if (canvas && ctx) {
         animacaoParticulas = requestAnimationFrame(desenharParticulas);
     }
 
+    // liga ou pausa o efeito conforme a preferencia de movimento
     function atualizarAnimacaoParticulas() {
         if (animacaoParticulas) {
             cancelAnimationFrame(animacaoParticulas);
@@ -284,6 +303,7 @@ if (canvas && ctx) {
 
 
 
+// pega o banner e os botoes para trocar os destaques
 const slidesbanner = document.querySelectorAll("#banner .banner-slide");
 const botaoAnterior = document.querySelector("#banner-anterior");
 const botaoProximo = document.querySelector("#banner-proximo");
@@ -291,6 +311,7 @@ const botaoProximo = document.querySelector("#banner-proximo");
 if (slidesbanner.length > 0 && botaoAnterior && botaoProximo) {
     let slideAtual = 0;
 
+    // esconde o destaque atual e mostra o escolhido
     function mostrarSlide(indice) {
         slidesbanner[slideAtual].hidden = true;
         slideAtual = (indice + slidesbanner.length) % slidesbanner.length;
@@ -306,6 +327,7 @@ if (slidesbanner.length > 0 && botaoAnterior && botaoProximo) {
     });
 }
 
+// carrega o tema salvo e deixa trocar pelo botao
 const botaoTema = document.querySelector("#tema-botao");
 
 if (botaoTema) {
@@ -318,5 +340,108 @@ if (botaoTema) {
     botaoTema.addEventListener("click", () => {
         const temaClaroAtivo = document.body.classList.toggle("tema-claro");
         localStorage.setItem("tema", temaClaroAtivo ? "claro" : "escuro");
+    });
+}
+
+// aqui ficam as frases que podem sair na roleta
+const frases = [
+    "Cada linha de código é mais um passo.",
+    "Erros também ajudam a gente a aprender.",
+    "Um projeto simples terminado já é uma conquista.",
+    "Pratique um pouco hoje e você saberá mais amanhã.",
+    "Divida um problema grande em partes menores.",
+    "Continue tentando, mesmo quando o código não funcionar.",
+    "Boas perguntas ajudam a encontrar boas soluções.",
+    "Teste suas ideias para descobrir o que funciona.",
+    "Todo desenvolvedor já precisou pesquisar uma resposta.",
+    "Faça funcionar primeiro e depois melhore com calma.",
+    "Uma página de cada vez também constrói um grande projeto.",
+    "Aprender a procurar respostas também é uma habilidade.",
+    "Seu progresso aparece quando você olha para onde começou.",
+    "Mude uma coisa por vez e veja o resultado.",
+    "Pequenas melhorias deixam um projeto cada vez melhor.",
+    "Quando travar, tente explicar o problema em voz alta.",
+    "Aprender programação é experimentar, errar e ajustar.",
+    "Salve seu trabalho e comemore cada etapa concluída.",
+    "Criar algo seu é uma ótima forma de aprender.",
+    "Respire, revise o código e tente mais uma vez."
+];
+// aqui o botao escolhe uma frase e mostra na pagina
+const botaoFrase = document.querySelector("#soltar-frase");
+const textoFrase = document.querySelector("#frase-atual");
+let ultimaFrase = -1;
+
+if (botaoFrase && textoFrase) {
+    botaoFrase.addEventListener("click", () => {
+        let indiceFrase;
+
+        do {
+            indiceFrase = Math.floor(Math.random() * frases.length);
+   } while (indiceFrase === ultimaFrase);
+
+        ultimaFrase = indiceFrase;
+        textoFrase.textContent = frases[indiceFrase];
+    });
+}
+
+// pega o campo e os cartoes para filtrar os projetos
+const campopesquisa = document.querySelector("#pesquisa-proj");
+const resultadoPesquisa = document.querySelector("#resultado-pesquisa");
+const cartoesProjetos = document.querySelectorAll("#projetos .cartao-projeto");
+
+if (campopesquisa && resultadoPesquisa && cartoesProjetos.length > 0) {
+    // refaz a busca toda vez que o texto muda
+    campopesquisa.addEventListener("input", () => {
+        const pesquisa = campopesquisa.value.trim().toLocaleLowerCase("pt-BR");
+        let quantidadeEncontrada = 0;
+
+        cartoesProjetos.forEach((cartao) => {
+            const textoCartao = cartao.textContent.trim().toLocaleLowerCase("pt-BR");
+            const encontrado = textoCartao.includes(pesquisa);
+
+            cartao.hidden = !encontrado;
+
+            if (encontrado) {
+                quantidadeEncontrada++;
+            }
+        });
+
+        resultadoPesquisa.textContent = quantidadeEncontrada === 0
+            ? "Nenhum projeto encontrado."
+            : `${quantidadeEncontrada} projeto(s) encontrado(s).`;
+    });
+}
+
+// aqui voce adiciona tarefas e pode marcar quando terminar
+const formularioTarefa = document.querySelector("#form-tarefa");
+const campoTarefa = document.querySelector("#text-tarefa");
+const listaTarefas = document.querySelector("#lista-tarefas");
+const resultadoTarefas = document.querySelector("#resultado-tarefas");
+
+if (formularioTarefa && campoTarefa && listaTarefas && resultadoTarefas) {
+    // pega o texto e cria uma tarefa quando enviar o formulario
+    formularioTarefa.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+
+        const textoTarefa = campoTarefa.value.trim();
+
+        if (textoTarefa === "") {
+            resultadoTarefas.textContent = "digite uma tarefa primeiro";
+            return;
+        }
+
+        // cria uma caixinha para poder marcar a tarefa pronta
+        const itemTarefa = document.createElement("li");
+        const marcarTarefa = document.createElement("input");
+        const texto = document.createTextNode(` ${textoTarefa}`);
+        const etiquetaTarefa = document.createElement("label");
+
+        marcarTarefa.type = "checkbox";
+        etiquetaTarefa.append(marcarTarefa, texto);
+        itemTarefa.appendChild(etiquetaTarefa);
+        listaTarefas.appendChild(itemTarefa);
+
+        campoTarefa.value = "";
+        resultadoTarefas.textContent = "tarefa adicionada";
     });
 }

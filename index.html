@@ -36,6 +36,7 @@
     <main>
         <!-- apresentacao principal da pagina inicial -->
         <!--talvez mudar isso pra algo formal-->
+        <!-- esses destaques podem ser trocados pelos botoes -->
         <section id="banner" aria-label="destaque">
             <div class="banner-slide" aria-label="destaque 1 de 2">
                 <h2>desenvolvimento de web</h2>
@@ -50,6 +51,37 @@
                 <button id="banner-proximo" type="button" aria-label="destaque próximo">▶</button>
             </div>
         </section>
+        <!-- aqui sai uma frase aleatoria quando clicar no botao -->
+        <section id="roleta-frases" aria-labelledby="titulo-roleta">
+            <h2 id="titulo-roleta">roleta de frases</h2>
+            <!-- essa frase vai mudar quando clicar no botao -->
+             <p id="frase-atual" aria-live="polite">
+                clique aqui para sua frase
+             </p>
+             <button id="soltar-frase" class="botao-projeto" type="button">
+                soltar frase
+             </button>
+        </section>
+        <!-- aqui voce adiciona tarefas e marca as que ja terminou -->
+        <section id="lista">
+            <h2>minhas tarefas</h2>
+
+            <form id="form-tarefa">
+                <label for="text-tarefa">adicionar tarefa:</label>
+                <input
+                id="text-tarefa"
+                type="text"
+                placeholder="digite sua tarefa"
+                required
+                >
+                <button class="botao-projeto" type="submit">adicionar</button>
+            </form>
+            <ul id="lista-tarefas" aria-live="polite">
+                <!-- as tarefas vao aparecer aqui -->
+            </ul>
+            <p id="resultado-tarefas" aria-live="polite"></p>
+        </section>
+
         <section id="inicio">
             <h2>Sou Gabe e estou virando um dev ;)
                 | Talvez red team | Mexo com IoT
@@ -112,6 +144,7 @@
         <p>&copy; 2026 Gabe. Todos os direitos reservados.</p>
     </footer>
 
+    <!-- carrega a biblioteca de animacao e o javascript do site -->
     <script src="https://cdn.jsdelivr.net/npm/animejs@4/dist/bundles/anime.umd.min.js"></script>
     <script src="javascriptch.js"></script>
 </body>
