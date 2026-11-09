@@ -1,0 +1,96 @@
+<?php
+$projetos = [];
+$erroAoCarregar = false;
+
+try {
+    require_once __DIR__ . '/conexao.php';
+    $consulta = $pdo->query(
+        'SELECT nome, descricao, tecnologias, link FROM projetos ORDER BY id'
+    );
+    $projetos = $consulta->fetchAll();
+} catch (PDOException $erro) {
+    error_log('Erro ao carregar projetos: ' . $erro->getMessage());
+    $erroAoCarregar = true;
+}
+?>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0b0b0f">
+    <title>Gabe | Projetos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- camada que pode ser usada como fundo pras particulas -->
+    <canvas id="particulas" aria-hidden="true"></canvas>
+
+    <!-- nome do site e links pra navegar entre as paginas -->
+    <header>
+        <h1>Gabe</h1>
+        <button id="menu-botao" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu">☰</button>
+        <nav id="menu">
+            <a href="index.html">Início</a>
+            <a href="seguir.html">Seguir</a>
+            <a href="sobre.html">Sobre Mim</a>
+            <a href="contato.html">Contato</a>
+            <a href="habilidades.html">Habilidades</a>
+            <a href="projetos.php" aria-current="page">Projetos</a>
+            <a href="ascii.html">ASCII</a>
+        </nav>
+        <button id="tema-botao" type="button" aria-label="Alternar tema">🌙</button>
+    </header>
+
+    <main>
+        <!-- lista com os cartoes dos projetos -->
+        <section id="projetos">
+            <h2>Meus projetos</h2>
+            <!-- esse campo procura pelo nome, descricao ou tecnologia -->
+            <label for="pesquisa-proj">pesquisar projeto:</label>
+            <input 
+            id="pesquisa-proj"
+            type="search"
+            placeholder="nome, tech ou descrição"
+            >
+        <p id="resultado-pesquisa" aria-live="polite"></p>
+            <div class="lista-projetos">
+                <?php if ($erroAoCarregar): ?>
+                    <p>Não foi possível carregar os projetos. Confira a configuração do banco de dados e o log do PHP.</p>
+                <?php elseif (count($projetos) === 0): ?>
+                    <p>Nenhum projeto cadastrado ainda.</p>
+                <?php else: ?>
+                    <?php foreach ($projetos as $projeto): ?>
+                        <article class="cartao-projeto">
+                            <h3><?= htmlspecialchars($projeto['nome'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></h3>
+                            <p><?= htmlspecialchars($projeto['descricao'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></p>
+                            <span><?= htmlspecialchars($projeto['tecnologias'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?></span>
+                            <?php
+                            $link = $projeto['link'];
+                            $esquema = $link ? parse_url($link, PHP_URL_SCHEME) : null;
+                            ?>
+                            <?php if ($link && filter_var($link, FILTER_VALIDATE_URL) && in_array($esquema, ['http', 'https'], true)): ?>
+                                <a class="botao-projeto" href="<?= htmlspecialchars($link, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer">
+                                    Ver projeto
+                                </a>
+                            <?php endif; ?>
+                        </article>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
+        </section>
+    </main>
+
+    <!-- rodape da pagina -->
+    <footer>
+        <p>&copy; 2026 Gabe. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- carrega a biblioteca de animacao e o javascript do site -->
+    <script src="https://cdn.jsdelivr.net/npm/animejs@4/dist/bundles/anime.umd.min.js"></script>
+    <script src="javascriptch.js"></script>
+</body>
+
+</html>
