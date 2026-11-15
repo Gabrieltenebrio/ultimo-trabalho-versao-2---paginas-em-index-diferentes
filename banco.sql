@@ -36,3 +36,30 @@ VALUES
         NULL
     )
 ON DUPLICATE KEY UPDATE id = id;
+
+-- cria a tabela para guardar quem se inscreveu no site
+CREATE TABLE IF NOT EXISTS seguidores (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL,
+    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_seguidores_email (email)
+);
+
+
+-- cria a tabela de usuarios para o login
+CREATE TABLE IF NOT EXISTS users (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_users_email (email)
+);
+
+-- cadastra o seu usuario de admin inicial com senha protegida
+INSERT INTO users (email, password) 
+VALUES (
+    'admin@gabe.com', 
+    '$2y$10$lgKAwJQxeBWFB2gfGY7v6.ag0Vib1MkFStzVFYKMrAVORfYVrsQXy'
+) ON DUPLICATE KEY UPDATE email = email;

@@ -7,9 +7,7 @@
     <title>seguir</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<!--parece muito basico
-vou tentar deixar mais bonito
-implementar a verificaçai de login e talvez fazer com que receba um email automatico-->
+<!-- formulario para se inscrever e receber email automatico -->
 
 <body>
     <!-- camada que pode ser usada como fundo pras particulas -->
@@ -30,26 +28,29 @@ implementar a verificaçai de login e talvez fazer com que receba um email autom
         </nav>
         <button id="tema-botao" type="button" aria-label="Alternar tema">🌙</button>
     </header>
-<!-- formulario visual de entrada, ainda sem login conectado ao banco -->
+
     <main>
-        <!-- formulario simples com campos de email e senha -->
+        <!-- formulario simples para a pessoa se cadastrar e seguir -->
         <section id="login">
             <div class="cartao-login">
-                <form action="#" method="post">
+                <!-- envia o email da pessoa para ser salvo pelo php -->
+                <form action="salvar_seguidor.php" method="POST">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" required>
-                    <label for="senha">Senha:</label>
-                    <input type="password" id="senha" name="senha" required>
-                    <button type="submit" class="botao-projeto">Entrar</button>
+                    <input type="email" id="email" name="email" required placeholder="seu@email.com">
+
+                    <!-- caixinha para confirmar que concorda com os termos -->
                     <label>
                         <input type="checkbox" required>
                         concordo com os <a href="termos.html">termos de uso</a> 
                         e a <a href="privacidade.html">política de privacidade</a>
                     </label>
+
+                    <button type="submit" class="botao-projeto">Seguir</button>
                 </form>
             </div>
         </section>
     </main>
+
     <!-- fim da pagina -->
     <!-- carrega o javascript usado pelo tema e pelo menu -->
     <script src="javascriptch.js"></script>

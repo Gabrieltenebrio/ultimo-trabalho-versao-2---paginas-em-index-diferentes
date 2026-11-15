@@ -1,14 +1,19 @@
 <?php
+// guarda a lista de projetos e se aconteceu algum erro ao buscar
 $projetos = [];
 $erroAoCarregar = false;
 
 try {
+    // puxa a conexao com o banco de dados
     require_once __DIR__ . '/conexao.php';
+
+    // busca os projetos cadastrados no mysql em ordem pelo id
     $consulta = $pdo->query(
         'SELECT nome, descricao, tecnologias, link FROM projetos ORDER BY id'
     );
     $projetos = $consulta->fetchAll();
 } catch (PDOException $erro) {
+    // anota o erro no log do servidor e ativa o aviso na tela
     error_log('Erro ao carregar projetos: ' . $erro->getMessage());
     $erroAoCarregar = true;
 }
