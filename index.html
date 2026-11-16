@@ -5,19 +5,21 @@
     <meta charset='UTF-8'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfólio do Gabe, dev web, IoT e segurança.">
+    <!-- link publico do repositorio no github para o professor: https://github.com/Gabrieltenebrio/ultimo-trabalho-versao-2---paginas-em-index-diferentes -->
     <title>Gabe | Início</title>
     <link rel="stylesheet" href="style.css">
     <meta name="theme-color" content="#0b0b0f">
 </head>
 
 <body>
+    <!-- camada para o fundo de particulas no canvas -->
     <canvas id="particulas"></canvas>
 
     <header>
         <h1>Gabe</h1>
         <button id="menu-botao">☰</button>
         <nav id="menu">
-            <!-- TODO: refazer esse menu quando colocar JS -->
+            <!-- links para navegar entre as paginas do site -->
             <a href="index.html" aria-current="page">Início</a>
             <a href="seguir.html">Seguir</a>
             <a href="sobre.html">Sobre Mim</a>
@@ -25,11 +27,13 @@
             <a href="habilidades.html">Habilidades</a>
             <a href="projetos.php">Projetos</a>
             <a href="ascii.html">ASCII</a>
+            <a href="login.php">Login</a>
         </nav>
         <button id="tema-botao" type="button">🌙</button>
     </header>
 
     <main>
+        <!-- banner com dois destaques alternaveis por botoes -->
         <section id="banner">
             <div class="banner-slide">
                 <h2>desenvolvimento de web</h2>
@@ -45,12 +49,14 @@
             </div>
         </section>
 
+        <!-- gerador de frases aleatorias -->
         <section id="roleta-frases">
             <h2 id="titulo-roleta">roleta de frases</h2>
             <p id="frase-atual">clique aqui para sua frase</p>
             <button id="soltar-frase" class="botao-projeto" type="button">soltar frase</button>
         </section>
 
+        <!-- lista de tarefas interativa com checkbox -->
         <section id="lista">
             <h2>minhas tarefas</h2>
 
@@ -66,13 +72,14 @@
             <p id="resultado-tarefas"></p>
         </section>
 
+        <!-- apresentacao inicial e foto -->
         <section id="inicio">
             <h2>Sou Gabe e estou virando dev ;) | talvez red team | mexo com IoT</h2>
             
-            <!-- foto -->
+            <!-- foto de perfil -->
             <img src="20261006_160027.jpg" alt="Foto de Gabe">
 
-            <!-- TODO: arrumar esse player com js dps -->
+            <!-- player de musica com controles em js -->
             <div class="music-player">
                 <div class="music-info">
                     <div class="music-cover"><span>♫</span></div>
@@ -108,10 +115,12 @@
         </section>
     </main>
 
+    <!-- rodape da pagina -->
     <footer>
         <p>&copy; 2026 Gabe. Todos os direitos reservados.</p>
     </footer>
 
+    <!-- scripts para tema, animacao e funcoes -->
     <script src="https://cdn.jsdelivr.net/npm/animejs@4/dist/bundles/anime.umd.min.js"></script>
     <script src="javascriptch.js"></script>
 </body>

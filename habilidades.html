@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0b0b0f">
+    <!-- link publico do repositorio no github para o professor: https://github.com/Gabrieltenebrio/ultimo-trabalho-versao-2---paginas-em-index-diferentes -->
     <title>Gabe | Habilidades</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -25,6 +26,7 @@
             <a href="habilidades.html" aria-current="page">Habilidades</a>
             <a href="projetos.php">Projetos</a>
             <a href="ascii.html">ASCII</a>
+            <a href="login.php">Login</a>
         </nav>
         <button id="tema-botao" type="button" aria-label="Alternar tema">
             🌙
@@ -34,40 +36,47 @@
     <main>
         <!-- separa minhas habilidades por assunto -->
         <section id="habilidades">
-            <!-- tenho que estudar essa hieraquia dos H é confuso-->
-            <h2>Minhas habilidades</h2>
-
-            <!-- habilidades que estou aprendendo para criar sites -->
+            <h2>Habilidades</h2>
             <div>
-                <h3>Desenvolvimento web</h3>
-                <h4>HTML</h4>
-                <p>Conhecimentos em estruturação de páginas web.</p>
+                <!-- cartoes de web -->
+                <article>
+                    <h3>Desenvolvimento Web</h3>
+                    <ul>
+                        <li>HTML5 estruturado e semântico</li>
+                        <li>CSS3 responsivo</li>
+                        <li>JavaScript</li>
+                    </ul>
+                </article>
 
-                <h4>CSS</h4>
-                <p>Conhecimentos em estilização e responsividade.</p>
+                <!-- cartoes de hardware e iot -->
+                <article>
+                    <h3>Hardware e IoT</h3>
+                    <ul>
+                        <li>Arduino e ESP32</li>
+                        <li>C e C++ para embarcados</li>
+                        <li>Integração de sensores</li>
+                    </ul>
+                </article>
 
-                <h4>JavaScript</h4>
-                <p>Conhecimentos básicos em interatividade para sites.</p>
-            </div>
+                <!-- cartoes de seguranca -->
+                <article>
+                    <h3>Segurança Cibernética</h3>
+                    <ul>
+                        <li>Conceitos básicos de redes</li>
+                        <li>Fundamentos de Red Team</li>
+                        <li>Segurança defensiva</li>
+                    </ul>
+                </article>
 
-            <!-- linguagens e assuntos que estudo para IoT -->
-            <div>
-                <h3>IoT e programação</h3>
-                <h4>C++</h4>
-                <p>Conhecimentos básicos em C++.</p>
-
-                <h4>C</h4>
-                <p>Conhecimentos básicos em C.</p>
-            </div>
-
-            <!-- conhecimentos de programacao e seguranca -->
-            <div>
-                <h3>Back-end e segurança</h3>
-                <h4>Python</h4>
-                <p>Estudando programação e automação com Python.</p>
-
-                <h4>Kali Linux</h4>
-                <p>Aprendendo a usar ferramentas de segurança em ambientes autorizados.</p>
+                <!-- outros estudos -->
+                <article>
+                    <h3>Outras Ferramentas</h3>
+                    <ul>
+                        <li>Git e GitHub para versionamento</li>
+                        <li>Noções básicas de Linux</li>
+                        <li>Figma para wireframes</li>
+                    </ul>
+                </article>
             </div>
         </section>
     </main>
@@ -76,7 +85,8 @@
     <footer>
         <p>&copy; 2026 Gabe. Todos os direitos reservados.</p>
     </footer>
-    <!--mesma coisa de antes-->
+
+    <!-- carrega a biblioteca de animacao e o javascript do site -->
     <script src="https://cdn.jsdelivr.net/npm/animejs@4/dist/bundles/anime.umd.min.js"></script>
     <script src="javascriptch.js"></script>
 </body>
