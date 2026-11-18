@@ -1,31 +1,19 @@
-// confere se a pessoa prefere menos movimento na pagina
+// olha se a pessoa quer menos ou mais movimento e anima as secoes da pagina conforme isso
 const prefereMovimentoReduzido = window.matchMedia(
     "(prefers-reduced-motion: reduce)"
 );
 
-// pega as secoes para mostrar elas quando aparecem na tela
+// faz as secoes aparecerem quando rola a pagina
 const secoes = document.querySelectorAll("main section");
 
-// mostra tudo sem animacao se a pessoa preferir menos movimento
-if (prefereMovimentoReduzido.matches || !("IntersectionObserver" in window)) {
-    secoes.forEach((secao) => {
-        secao.classList.add("visivel");
+if (secoes.length > 0) {
+    const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+            if (entrada.isIntersecting) {
+                entrada.target.classList.add("visivel");
+            }
+        });
     });
-} else {
-    // observa as secoes e mostra cada uma quando ela aparece
-    const observador = new IntersectionObserver(
-        (entradas) => {
-            entradas.forEach((entrada) => {
-                if (entrada.isIntersecting) {
-                    entrada.target.classList.add("visivel");
-                    observador.unobserve(entrada.target);
-                }
-            });
-        },
-        {
-            threshold: 0.15
-        }
-    );
 
     secoes.forEach((secao) => {
         secao.classList.add("aparecer");
@@ -33,7 +21,7 @@ if (prefereMovimentoReduzido.matches || !("IntersectionObserver" in window)) {
     });
 }
 
-// anima o titulo e a foto da pagina inicial
+// anima o titulo e a pfp da pagina inicial
 if (!prefereMovimentoReduzido.matches && typeof anime !== "undefined") {
     const tituloInicio = document.querySelector("#inicio h2");
     const imagemInicio = document.querySelector("#inicio img");
@@ -64,27 +52,26 @@ const menu = document.querySelector("#menu");
 
 if (menuBotao && menu) {
     menuBotao.addEventListener("click", () => {
-        const aberto = menu.classList.toggle("menu-aberto");
+        menu.classList.toggle("menu-aberto");
 
-        menuBotao.setAttribute("aria-expanded", aberto);
-        menuBotao.setAttribute(
-            "aria-label",
-            aberto ? "Fechar menu" : "Abrir menu"
-        );
-        menuBotao.textContent = aberto ? "✕" : "☰";
+        // muda o icon de abrir e fechar
+        if (menu.classList.contains("menu-aberto")) {
+            menuBotao.textContent = "✕";
+        } else {
+            menuBotao.textContent = "☰";
+        }
     });
 
+    // fecha se clicar em algum link do menu
     menu.querySelectorAll("a").forEach((link) => {
         link.addEventListener("click", () => {
             menu.classList.remove("menu-aberto");
-            menuBotao.setAttribute("aria-expanded", "false");
-            menuBotao.setAttribute("aria-label", "Abrir menu");
             menuBotao.textContent = "☰";
         });
     });
 }
 
-// pega os controles do player de musica
+// elementos do player de musica
 const player = document.querySelector("#player");
 const botaoMusica = document.querySelector("#music-play");
 const progressoMusica = document.querySelector("#music-progress");
@@ -94,214 +81,141 @@ const controleVolume = document.querySelector("#music-volume");
 const valorVolume = document.querySelector("#music-volume-value");
 const statusMusica = document.querySelector("#music-status");
 
-if (
-    player &&
-    botaoMusica &&
-    progressoMusica &&
-    tempoAtualMusica &&
-    duracaoMusica &&
-    controleVolume &&
-    valorVolume &&
-    statusMusica
-) {
-    // transforma a duracao em minutos e segundos
-    const formatarTempo = (tempo) => {
-        if (!Number.isFinite(tempo)) {
-            return "00:00";
-        }
-
-        const minutos = Math.floor(tempo / 60);
-        const segundos = Math.floor(tempo % 60);
-
-        return `${String(minutos).padStart(2, "0")}:${String(segundos).padStart(2, "0")}`;
-    };
-
-    // atualiza a duracao assim que o navegador carrega a musica
-    const atualizarDuracao = () => {
-        duracaoMusica.textContent = formatarTempo(player.duration);
-        progressoMusica.disabled = !Number.isFinite(player.duration);
-    };
-
-    // mostra o tempo atual e move a barra de progresso
-    const atualizarProgresso = () => {
-        tempoAtualMusica.textContent = formatarTempo(player.currentTime);
-
-        if (Number.isFinite(player.duration) && player.duration > 0) {
-            progressoMusica.value = String(
-                (player.currentTime / player.duration) * 100
-            );
-        }
-    };
-
-    player.volume = Number(controleVolume.value);
-    valorVolume.textContent = `${Math.round(player.volume * 100)}%`;
-    atualizarDuracao();
-
-    // toca ou pausa a musica quando apertar o botao
-    botaoMusica.addEventListener("click", () => {
-        if (player.paused) {
-            player.play().catch(() => {
-                statusMusica.textContent =
-                    "Não foi possível reproduzir a música.";
-            });
-        } else {
-            player.pause();
-        }
-    });
-
-    // atualiza o botao e o aviso quando a musica toca ou para
-    player.addEventListener("play", () => {
-        botaoMusica.textContent = "❚❚";
-        botaoMusica.setAttribute("aria-label", "Pausar música");
-        statusMusica.textContent = "Tocando";
-    });
-
-    player.addEventListener("pause", () => {
-        botaoMusica.textContent = "▶";
-        botaoMusica.setAttribute("aria-label", "Reproduzir música");
-
-        if (!player.ended && !player.error) {
-            statusMusica.textContent = "Pausada";
-        }
-    });
-
-    // mostra avisos se a musica terminar ou der erro
-    player.addEventListener("ended", () => {
-        statusMusica.textContent = "Música finalizada";
-    });
-
-    player.addEventListener("error", () => {
-        statusMusica.textContent = "Não foi possível carregar a música.";
-    });
-
-    player.addEventListener("loadedmetadata", atualizarDuracao);
-    player.addEventListener("durationchange", atualizarDuracao);
-    player.addEventListener("timeupdate", atualizarProgresso);
-
-    // deixa mudar o ponto da musica pela barra
-    progressoMusica.addEventListener("input", () => {
-        if (Number.isFinite(player.duration)) {
-            player.currentTime =
-                (Number(progressoMusica.value) / 100) * player.duration;
-        }
-    });
-
-    // muda o volume e atualiza o numero na tela
-    controleVolume.addEventListener("input", () => {
-        player.volume = Number(controleVolume.value);
-        valorVolume.textContent = `${Math.round(player.volume * 100)}%`;
-    });
-}
-
-// prepara a tela onde as particulas vao aparecer
-const canvas = document.querySelector("#particulas");
-const ctx = canvas?.getContext("2d");
-
-if (canvas && ctx) {
-    let particulas = [];
-    let largura = 0;
-    let altura = 0;
-    let animacaoParticulas;
-
-    // ajusta o tamanho da tela e cria as particulas
-    function ajustarCanvas() {
-        const escala = Math.min(window.devicePixelRatio || 1, 2);
-
-        largura = window.innerWidth;
-        altura = window.innerHeight;
-
-        canvas.width = largura * escala;
-        canvas.height = altura * escala;
-        canvas.style.width = `${largura}px`;
-        canvas.style.height = `${altura}px`;
-
-        ctx.setTransform(escala, 0, 0, escala, 0, 0);
-
-        const quantidade = Math.min(
-            70,
-            Math.floor((largura * altura) / 14000)
-        );
-
-        particulas = Array.from({ length: quantidade }, () => ({
-            x: Math.random() * largura,
-            y: Math.random() * altura,
-            raio: Math.random() * 2 + 0.5,
-            velocidade: Math.random() * 0.35 + 0.1,
-            opacidade: Math.random() * 0.6 + 0.2
-        }));
+// so ativa o player se ele existir nessa pagina
+if (player && botaoMusica) {
+    // funcao basica pra formatar segundos em 00:00
+    function formatarTempo(segundos) {
+        if (!segundos) return "00:00";
+        let min = Math.floor(segundos / 60);
+        let seg = Math.floor(segundos % 60);
+        if (min < 10) min = "0" + min;
+        if (seg < 10) seg = "0" + seg;
+        return min + ":" + seg;
     }
 
-    // desenha as particulas e liga as que estao perto
-    function desenharParticulas() {
+    // ajusta o volume inicial conforme o slider
+    if (controleVolume) {
+        player.volume = controleVolume.value;
+    }
+
+    // play e pause no botao
+    botaoMusica.addEventListener("click", () => {
+        if (player.paused) {
+            player.play();
+            botaoMusica.textContent = "❚❚";
+            if (statusMusica) statusMusica.textContent = "Tocando";
+        } else {
+            player.pause();
+            botaoMusica.textContent = "▶";
+            if (statusMusica) statusMusica.textContent = "Pausada";
+        }
+    });
+
+    // quando carregar a musica, pega o tempo total
+    player.addEventListener("loadedmetadata", () => {
+        if (duracaoMusica) {
+            duracaoMusica.textContent = formatarTempo(player.duration);
+        }
+    });
+
+    // atualiza a barra e o relogio enquanto toca
+    player.addEventListener("timeupdate", () => {
+        if (tempoAtualMusica) {
+            tempoAtualMusica.textContent = formatarTempo(player.currentTime);
+        }
+        if (progressoMusica && player.duration) {
+            progressoMusica.value = (player.currentTime / player.duration) * 100;
+        }
+    });
+
+    // mudar o tempo clicando na barra
+    if (progressoMusica) {
+        progressoMusica.addEventListener("input", () => {
+            player.currentTime = (progressoMusica.value / 100) * player.duration;
+        });
+    }
+
+    // controle de volume
+    if (controleVolume) {
+        controleVolume.addEventListener("input", () => {
+            player.volume = controleVolume.value;
+            if (valorVolume) {
+                valorVolume.textContent = Math.round(player.volume * 100) + "%";
+            }
+        });
+    }
+}
+
+// fundo animado de particulas no canvas
+const canvas = document.querySelector("#particulas");
+
+if (canvas) {
+    const ctx = canvas.getContext("2d");
+
+    let largura = window.innerWidth;
+    let altura = window.innerHeight;
+    canvas.width = largura;
+    canvas.height = altura;
+
+    // redimensiona o canvas se a janela mudar
+    window.addEventListener("resize", () => {
+        largura = window.innerWidth;
+        altura = window.innerHeight;
+        canvas.width = largura;
+        canvas.height = altura;
+    });
+
+    // cria 40 bolinhas com posicao e velocidade aleatoria
+    const particulas = [];
+    for (let i = 0; i < 40; i++) {
+        particulas.push({
+            x: Math.random() * largura,
+            y: Math.random() * altura,
+            raio: Math.random() * 2 + 1,
+            velY: Math.random() * 0.5 + 0.2
+        });
+    }
+
+    // desenha e movimenta as bolinhas
+    function animar() {
         ctx.clearRect(0, 0, largura, altura);
 
-        particulas.forEach((particula, indice) => {
-            particula.y -= particula.velocidade;
-
-            if (particula.y < -5) {
-                particula.y = altura + 5;
-                particula.x = Math.random() * largura;
+        particulas.forEach((p, index) => {
+            // sobe a bolinha
+            p.y -= p.velY;
+            if (p.y < 0) {
+                p.y = altura;
+                p.x = Math.random() * largura;
             }
 
+            // desenha o circulo
             ctx.beginPath();
-            ctx.arc(
-                particula.x,
-                particula.y,
-                particula.raio,
-                0,
-                Math.PI * 2
-            );
-            ctx.fillStyle = `rgba(169, 112, 255, ${particula.opacidade})`;
+            ctx.arc(p.x, p.y, p.raio, 0, Math.PI * 2);
+            ctx.fillStyle = "rgba(169, 112, 255, 0.5)";
             ctx.fill();
 
-            for (let proxima = indice + 1; proxima < particulas.length; proxima++) {
-                const outra = particulas[proxima];
-                const dx = particula.x - outra.x;
-                const dy = particula.y - outra.y;
-                const distanciaQuadrada = dx * dx + dy * dy;
+            // liga as bolinhas que estao perto uma da outra
+            for (let j = index + 1; j < particulas.length; j++) {
+                let p2 = particulas[j];
+                let dx = p.x - p2.x;
+                let dy = p.y - p2.y;
+                let dist = Math.sqrt(dx * dx + dy * dy);
 
-                if (distanciaQuadrada < 110 * 110) {
-                    const distancia = Math.sqrt(distanciaQuadrada);
-
+                if (dist < 100) {
                     ctx.beginPath();
-                    ctx.moveTo(particula.x, particula.y);
-                    ctx.lineTo(outra.x, outra.y);
-                    ctx.strokeStyle =
-                        `rgba(112, 44, 255, ${0.15 * (1 - distancia / 110)})`;
-                    ctx.lineWidth = 0.6;
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.strokeStyle = "rgba(169, 112, 255, 0.15)";
                     ctx.stroke();
                 }
             }
         });
 
-        animacaoParticulas = requestAnimationFrame(desenharParticulas);
+        requestAnimationFrame(animar);
     }
 
-    // liga ou pausa o efeito conforme a preferencia de movimento
-    function atualizarAnimacaoParticulas() {
-        if (animacaoParticulas) {
-            cancelAnimationFrame(animacaoParticulas);
-            animacaoParticulas = undefined;
-        }
-
-        if (prefereMovimentoReduzido.matches) {
-            ctx.clearRect(0, 0, largura, altura);
-            return;
-        }
-
-        ajustarCanvas();
-        desenharParticulas();
-    }
-
-    atualizarAnimacaoParticulas();
-    window.addEventListener("resize", ajustarCanvas);
-    prefereMovimentoReduzido.addEventListener(
-        "change",
-        atualizarAnimacaoParticulas
-    );
+    animar();
 }
-
-
 
 // pega o banner e os botoes para trocar os destaques
 const slidesbanner = document.querySelectorAll("#banner .banner-slide");
@@ -343,21 +257,8 @@ if (botaoTema) {
     });
 }
 
-// aqui ficam as frases que podem sair na roleta
+// frases motivacionais / dicas
 const frases = [
-    "Cada linha de código é mais um passo.",
-    "Erros também ajudam a gente a aprender.",
-    "Um projeto simples terminado já é uma conquista.",
-    "Pratique um pouco hoje e você saberá mais amanhã.",
-    "Divida um problema grande em partes menores.",
-    "Continue tentando, mesmo quando o código não funcionar.",
-    "Boas perguntas ajudam a encontrar boas soluções.",
-    "Teste suas ideias para descobrir o que funciona.",
-    "Todo desenvolvedor já precisou pesquisar uma resposta.",
-    "Faça funcionar primeiro e depois melhore com calma.",
-    "Uma página de cada vez também constrói um grande projeto.",
-    "Aprender a procurar respostas também é uma habilidade.",
-    "Seu progresso aparece quando você olha para onde começou.",
     "Mude uma coisa por vez e veja o resultado.",
     "Pequenas melhorias deixam um projeto cada vez melhor.",
     "Quando travar, tente explicar o problema em voz alta.",
@@ -366,82 +267,79 @@ const frases = [
     "Criar algo seu é uma ótima forma de aprender.",
     "Respire, revise o código e tente mais uma vez."
 ];
-// aqui o botao escolhe uma frase e mostra na pagina
+
 const botaoFrase = document.querySelector("#soltar-frase");
 const textoFrase = document.querySelector("#frase-atual");
 let ultimaFrase = -1;
 
+// sorteia uma frase sem repetir a que acabou de sair
 if (botaoFrase && textoFrase) {
     botaoFrase.addEventListener("click", () => {
-        let indiceFrase;
-
+        let indice;
         do {
-            indiceFrase = Math.floor(Math.random() * frases.length);
-   } while (indiceFrase === ultimaFrase);
+            indice = Math.floor(Math.random() * frases.length);
+        } while (indice === ultimaFrase);
 
-        ultimaFrase = indiceFrase;
-        textoFrase.textContent = frases[indiceFrase];
+        ultimaFrase = indice;
+        textoFrase.textContent = frases[indice];
     });
 }
 
-// pega o campo e os cartoes para filtrar os projetos
-const campopesquisa = document.querySelector("#pesquisa-proj");
+// busca rapida de projetos
+const campoPesquisa = document.querySelector("#pesquisa-proj");
 const resultadoPesquisa = document.querySelector("#resultado-pesquisa");
 const cartoesProjetos = document.querySelectorAll("#projetos .cartao-projeto");
 
-if (campopesquisa && resultadoPesquisa && cartoesProjetos.length > 0) {
-    // refaz a busca toda vez que o texto muda
-    campopesquisa.addEventListener("input", () => {
-        const pesquisa = campopesquisa.value.trim().toLocaleLowerCase("pt-BR");
-        let quantidadeEncontrada = 0;
+if (campoPesquisa && cartoesProjetos.length > 0) {
+    campoPesquisa.addEventListener("input", () => {
+        const termo = campoPesquisa.value.toLowerCase().trim();
+        let total = 0;
 
         cartoesProjetos.forEach((cartao) => {
-            const textoCartao = cartao.textContent.trim().toLocaleLowerCase("pt-BR");
-            const encontrado = textoCartao.includes(pesquisa);
+            const texto = cartao.textContent.toLowerCase();
 
-            cartao.hidden = !encontrado;
-
-            if (encontrado) {
-                quantidadeEncontrada++;
+            // se tiver o termo, mostra, senao esconde
+            if (texto.includes(termo)) {
+                cartao.hidden = false;
+                total++;
+            } else {
+                cartao.hidden = true;
             }
         });
 
-        resultadoPesquisa.textContent = quantidadeEncontrada === 0
-            ? "Nenhum projeto encontrado."
-            : `${quantidadeEncontrada} projeto(s) encontrado(s).`;
+        if (resultadoPesquisa) {
+            if (total === 0) {
+                resultadoPesquisa.textContent = "Nenhum projeto encontrado.";
+            } else {
+                resultadoPesquisa.textContent = `${total} projeto(s) encontrado(s).`;
+            }
+        }
     });
 }
 
 // aqui voce adiciona tarefas e pode marcar quando terminar
-const formularioTarefa = document.querySelector("#form-tarefa");
-const campoTarefa = document.querySelector("#text-tarefa");
+const formTarefa = document.querySelector("#form-tarefa");
+const inputTarefa = document.querySelector("#text-tarefa");
 const listaTarefas = document.querySelector("#lista-tarefas");
-const resultadoTarefas = document.querySelector("#resultado-tarefas");
+const avisoTarefa = document.querySelector("#resultado-tarefas");
 
-if (formularioTarefa && campoTarefa && listaTarefas && resultadoTarefas) {
-    // pega o texto e cria uma tarefa quando enviar o formulario
-    formularioTarefa.addEventListener("submit", (evento) => {
-        evento.preventDefault();
+if (formTarefa && inputTarefa && listaTarefas) {
+    formTarefa.addEventListener("submit", (e) => {
+        e.preventDefault(); // nao deixa a pagina recarregar
 
-        const textoTarefa = campoTarefa.value.trim();
+        const texto = inputTarefa.value.trim();
 
-        if (textoTarefa === "") {
-            resultadoTarefas.textContent = "digite uma tarefa primeiro";
+        if (texto === "") {
+            if (avisoTarefa) avisoTarefa.textContent = "digite uma tarefa primeiro";
             return;
         }
 
-        // cria uma caixinha para poder marcar a tarefa pronta
-        const itemTarefa = document.createElement("li");
-        const marcarTarefa = document.createElement("input");
-        const texto = document.createTextNode(` ${textoTarefa}`);
-        const etiquetaTarefa = document.createElement("label");
+        // cria o li com a checkbox
+        const li = document.createElement("li");
+        li.innerHTML = `<label><input type="checkbox"> ${texto}</label>`;
+        listaTarefas.appendChild(li);
 
-        marcarTarefa.type = "checkbox";
-        etiquetaTarefa.append(marcarTarefa, texto);
-        itemTarefa.appendChild(etiquetaTarefa);
-        listaTarefas.appendChild(itemTarefa);
-
-        campoTarefa.value = "";
-        resultadoTarefas.textContent = "tarefa adicionada";
+        inputTarefa.value = "";
+        if (avisoTarefa) avisoTarefa.textContent = "tarefa adicionada";
     });
 }
